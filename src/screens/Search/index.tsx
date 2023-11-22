@@ -12,8 +12,10 @@ import {
 } from 'react-native';
 import {ListBrowse} from '../../components/ListBrowse';
 import {BROWSE} from '../../data';
+import {useNavigation} from '@react-navigation/native';
 
 export const SearchScreen = () => {
+  const navigation = useNavigation();
   const [artists, setArtists] = useState([
     {
       name: 'Childish Gambino',
@@ -51,10 +53,14 @@ export const SearchScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.searchBox}>
-          <Image source={require('../../assets/icons/search.png')} />
-          <TextInput placeholder="Search songs, artist, album o..." />
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('SearchTab')}>
+          <View style={styles.searchBox}>
+            <Image source={require('../../assets/icons/search.png')} />
+            <Text style={{paddingStart: 10}}>
+              Search songs, artist, album o...
+            </Text>
+          </View>
+        </TouchableOpacity>
         <View style={{flexDirection: 'row'}}>
           <Image
             source={require('../../assets/icons/trending_up.png')}
@@ -126,9 +132,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     opacity: 0.75,
-    borderRadius: 10,
+    borderRadius: 8,
     paddingHorizontal: 10,
     alignItems: 'center',
     margin: 10,
+    height: 40,
   },
 });

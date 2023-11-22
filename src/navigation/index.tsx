@@ -1,6 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeScreen} from '../screens/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SearchScreen} from '../screens/Search';
 import {YourLibraryScr} from '../YourLibrary';
@@ -8,6 +7,11 @@ import {SignUpScreen} from '../screens/SignUp';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {Image, StatusBar} from 'react-native';
+import {DemoTab} from 'screens/DemoTab';
+import {SearchTab} from 'screens/Search/SearchTab';
+import {likeSong} from 'src/YourLibrary/components/likeSong';
+import {Download} from 'src/YourLibrary/components/Download';
+import {Playlist} from 'src/YourLibrary/components/Playlists';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +34,11 @@ export const Router = () => {
             component={SignUpScreen}
           />
         )}
+        {GlobalScreens()}
+        {BackScreens()}
+        {LikeSong()}
+        {download()}
+        {playlist()}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -60,7 +69,7 @@ const TabBottom = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={DemoTab}
         options={{
           headerShown: false,
           tabBarIcon: ({focused, color}) => (
@@ -110,5 +119,41 @@ const TabBottom = () => {
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const GlobalScreens = () => {
+  return (
+    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={SearchTab} name="SearchTab" />
+    </Stack.Group>
+  );
+};
+const BackScreens = () => {
+  return (
+    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={SearchScreen} name="SearchScreen" />
+    </Stack.Group>
+  );
+};
+const LikeSong = () => {
+  return (
+    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={likeSong} name="likeSong" />
+    </Stack.Group>
+  );
+};
+const download = () => {
+  return (
+    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={Download} name="Download" />
+    </Stack.Group>
+  );
+};
+const playlist = () => {
+  return (
+    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={Playlist} name="Playlist" />
+    </Stack.Group>
   );
 };
