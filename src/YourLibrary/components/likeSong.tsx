@@ -13,7 +13,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {LIKED_SONG} from 'data/index';
 
-export const likeSong = () => {
+export const LikeSong = () => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const filterSongs = () => {
@@ -25,7 +25,7 @@ export const likeSong = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('YourLibrary')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image source={require('../../assets/icons/back.png')} />
           </TouchableOpacity>
           <Text

@@ -9,9 +9,12 @@ import {RootState} from '../store';
 import {Image, StatusBar} from 'react-native';
 import {DemoTab} from 'screens/DemoTab';
 import {SearchTab} from 'screens/Search/SearchTab';
-import {likeSong} from 'src/YourLibrary/components/likeSong';
+import {LikeSong} from 'src/YourLibrary/components/likeSong';
 import {Download} from 'src/YourLibrary/components/Download';
 import {Playlist} from 'src/YourLibrary/components/Playlists';
+import {ArtistsFollowing} from 'src/YourLibrary/components/ArtistsFollowing';
+import {ChiTietSong} from 'src/YourLibrary/components/ChiTiet';
+import {Player} from 'screens/Player';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,10 +38,6 @@ export const Router = () => {
           />
         )}
         {GlobalScreens()}
-        {BackScreens()}
-        {LikeSong()}
-        {download()}
-        {playlist()}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -126,34 +125,12 @@ const GlobalScreens = () => {
   return (
     <Stack.Group screenOptions={{headerShown: false}}>
       <Stack.Screen component={SearchTab} name="SearchTab" />
-    </Stack.Group>
-  );
-};
-const BackScreens = () => {
-  return (
-    <Stack.Group screenOptions={{headerShown: false}}>
-      <Stack.Screen component={SearchScreen} name="SearchScreen" />
-    </Stack.Group>
-  );
-};
-const LikeSong = () => {
-  return (
-    <Stack.Group screenOptions={{headerShown: false}}>
-      <Stack.Screen component={likeSong} name="likeSong" />
-    </Stack.Group>
-  );
-};
-const download = () => {
-  return (
-    <Stack.Group screenOptions={{headerShown: false}}>
+      <Stack.Screen component={LikeSong} name="likeSong" />
       <Stack.Screen component={Download} name="Download" />
-    </Stack.Group>
-  );
-};
-const playlist = () => {
-  return (
-    <Stack.Group screenOptions={{headerShown: false}}>
       <Stack.Screen component={Playlist} name="Playlist" />
+      <Stack.Screen component={ArtistsFollowing} name="ArtistsFollowing" />
+      <Stack.Screen component={ChiTietSong} name="ChiTietSong" />
+      <Stack.Screen component={Player} name="Player" />
     </Stack.Group>
   );
 };

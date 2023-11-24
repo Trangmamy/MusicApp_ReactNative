@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
-import {PLAYLIST} from 'data/index';
-import React from 'react';
+import {ARTISTS_FOLLOWING} from 'data/index';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,13 +13,13 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-export const Playlist = () => {
+export const ArtistsFollowing = () => {
   const navigation = useNavigation();
+  const [searchText, setSearchText] = useState('');
   const renderItem = ({item}) => (
     <View style={styles.item}>
       <Image source={item.image} style={styles.image} />
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.location}>{item.location}</Text>
     </View>
   );
   return (
@@ -37,7 +37,7 @@ export const Playlist = () => {
               opacity: 0.75,
               paddingLeft: 20,
             }}>
-            Playlists
+            Artists Following
           </Text>
         </View>
         <Text
@@ -47,7 +47,7 @@ export const Playlist = () => {
             opacity: 0.5,
             paddingVertical: 10,
           }}>
-          12 playlists
+          8 artists following
         </Text>
         <View
           style={{
@@ -59,6 +59,10 @@ export const Playlist = () => {
             <Image source={require('../../assets/icons/search.png')} />
             <TextInput
               placeholder="Search "
+              onChangeText={text => setSearchText(text)}
+              value={searchText}
+              //placeholderTextColor={'#a9abaa'}
+              //clearButtonMode="while-editing"
               autoCapitalize="none"
               style={{
                 fontSize: 16,
@@ -68,23 +72,13 @@ export const Playlist = () => {
               }}
             />
           </View>
-          <Image source={require('../../assets/icons/add.png')} />
-        </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            source={require('../../assets/icons/haichieu.png')}
-            style={{width: 20, height: 20, marginRight: 5}}
-          />
-          <Text style={{color: '#fff', fontSize: 16, opacity: 0.75}}>
-            Recents
-          </Text>
+          <Image source={require('../../assets/icons/haichieu.png')} />
         </View>
         <FlatList
-          data={PLAYLIST}
+          data={ARTISTS_FOLLOWING}
           renderItem={renderItem}
           keyExtractor={item => item.id.toString()}
-          numColumns={2}
-          contentContainerStyle={styles.container}
+          numColumns={3}
         />
       </ScrollView>
     </SafeAreaView>
@@ -114,15 +108,12 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 8,
     marginBottom: 5,
+    resizeMode: 'cover',
   },
   title: {
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 4,
     color: '#fff',
-  },
-  location: {
-    fontSize: 12,
-    color: '#888',
   },
 });

@@ -25,7 +25,7 @@ export const Download = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('YourLibrary')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image source={require('../../assets/icons/back.png')} />
           </TouchableOpacity>
           <Text

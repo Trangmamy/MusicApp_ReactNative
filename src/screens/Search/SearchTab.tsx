@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {SONG} from 'data/index';
+import {LIST_SONG, SONG} from 'data/index';
 import React, {useState} from 'react';
 import {
   View,
@@ -15,7 +15,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 export const SearchTab = () => {
   const [searchText, setSearchText] = useState('');
   const filterSongs = () => {
-    return SONG.filter(song =>
+    return LIST_SONG.filter(song =>
       song.title.toLowerCase().includes(searchText.toLowerCase()),
     );
   };
@@ -23,7 +23,7 @@ export const SearchTab = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
             source={require('../../assets/icons/arrow_back.png')}
             style={{marginTop: 10}}
@@ -52,7 +52,9 @@ export const SearchTab = () => {
         keyExtractor={item => item.id.toString()}
         renderItem={({item, index}) => {
           return (
-            <TouchableOpacity>
+            <TouchableOpacity
+              key={item.id}
+              onPress={() => navigation.navigate('Player', {songId: item.id})}>
               <View style={styles.BoxListSong}>
                 <Image source={item.image} style={styles.image} />
                 <View style={styles.textContainer}>

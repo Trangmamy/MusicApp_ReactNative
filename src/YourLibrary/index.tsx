@@ -56,7 +56,9 @@ export const YourLibraryScr = () => {
               <Text style={styles.text}>12 playlists</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.Menu}>
+          <TouchableOpacity
+            style={styles.Menu}
+            onPress={() => navigation.navigate('ArtistsFollowing')}>
             <View style={styles.Menu}>
               <Image source={require('../assets/icons/account.png')} />
               <Text style={styles.Txt}>Artists</Text>
